@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-function Navbar() {
+function Navbar(props) {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const handleChangeView = (isAdmin) => {
@@ -37,21 +37,21 @@ function Navbar() {
                 POST
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" to="/admin/filled">
                 FILLED
               </NavLink>
-            </li>
+            </li> */}
           </div>
         ) : null}
 
-        {!isAdmin ? (
+        {/* {!isAdmin ? (
           <li className="nav-item">
             <NavLink className="nav-link" to="/user/applied">
               APPLIED
             </NavLink>
           </li>
-        ) : null}
+        ) : null} */}
       </ul>
     </nav>
   );

@@ -26,5 +26,16 @@ router.post("/", async function (req, res, next) {
 });
 
 /* PUT method */
+router.put("/", async function (req, res, next) {
+  const { post_id, applicant_id } = req.body;
+  const sql = `UPDATE posts_applicants SET accepted = ${applicant_id} WHERE ref_post_id = ${post_id} AND ref_applicant_id = ${applicant_id} ;`;
+  try {
+    await db(sql);
+    let results = await db("SELECT * FROM applicants");
+    res.send(results.data);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 module.exports = router;

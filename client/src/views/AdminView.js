@@ -4,9 +4,10 @@ function AdminView(props) {
   const posts = props.posts;
   const applicants = props.applicants;
   const fillPost = props.fillPost;
+  const fillPostApplicant = props.fillPostApplicant;
+  const postApplicants = props.postApplicants;
 
   const [featPost, setFeatPost] = useState(null);
-  const [applicant, setApplicant] = useState(null);
 
   useEffect(() => {
     setFeatPost(posts[0]);
@@ -20,8 +21,9 @@ function AdminView(props) {
     );
   }
 
-  function acceptApplicant() {
-    fillPost(applicant);
+  function handleCLick(post, applicant) {
+    fillPost(post);
+    fillPostApplicant(post, applicant);
   }
 
   return (
@@ -35,24 +37,25 @@ function AdminView(props) {
           <h6 className="card-subtitle">{featPost.title} </h6>
           <p className="card-text">{featPost.postdescription}</p>
         </div>
+
         <div className="col">
-          {posts.map((post) =>
-            post.filled === 0
-              ? applicants.map((applicant) => (
-                  <div key={applicant.applicant_id}>
-                    <h5 className="card-title"> {applicant.applicantname}</h5>
-                    <h6 className="card-subtitle">{applicant.email} </h6>
-                    <p className="card-text">{applicant.cv}</p>
-                    <button
-                      onClick={() => setApplicant(applicant) && acceptApplicant}
-                      className="btn"
-                    >
-                      Accept
-                    </button>
-                    <hr />
-                  </div>
-                ))
-              : null
+          {featPost.filled === 0 ? (
+            applicants.map((applicant) => (
+              <div key={applicant.applicant_id}>
+                <h5 className="card-title"> {applicant.applicantname}</h5>
+                <h6 className="card-subtitle">{applicant.email} </h6>
+                <p className="card-text">{applicant.cv}</p>
+                <button
+                  onClick={() => handleCLick(featPost, applicant)}
+                  className="btn"
+                >
+                  Accept
+                </button>
+                <hr />
+              </div>
+            ))
+          ) : (
+            <h4>Accepted Applicant:</h4>
           )}
         </div>
       </div>

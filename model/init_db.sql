@@ -38,7 +38,7 @@ ALTER TABLE posts_applicants ADD CONSTRAINT posts_applicants_fk1 FOREIGN KEY (re
     company, title, postdescription, filled
     ) VALUES 
         ('This one', 'internship', 'this is the description for an intership at this company where you will learn to do this and this...', 0),
- 	    ('Woolworths', 'job shadow store manager', 'Enjoy the constantia moms!', 1), 
+ 	    ('Woolworths', 'job shadow store manager', 'Enjoy the constantia moms!', 0), 
         ('Takealot', 'box packer internship', 'learn how to choose the correct box size', 0); 
 
 INSERT INTO applicants (
@@ -50,5 +50,11 @@ INSERT INTO applicants (
 
 INSERT INTO posts_applicants (
     ref_post_id, ref_applicant_id, accepted
-    ) VALUES (1,1,0), (1,2,0),(1,3,0);
+    ) VALUES 
+		(1,1,0), 
+		(1,2,0), 
+		(1,3,0), 
+		(2,1,0), 
+		(3,1,0), 
+		(3,3,0);
 

@@ -27,7 +27,7 @@ router.post("/", async function (req, res, next) {
 
 /* PUT method */
 router.put("/:id", async function (req, res, next) {
-  const sql = `UPDATE posts SET filled  =  !filled WHERE id = ${req.params.id};`;
+  const sql = `UPDATE posts SET filled  = 1 WHERE post_id = ${req.params.id};`;
   try {
     await db(sql);
     let results = await db("SELECT * FROM posts");
