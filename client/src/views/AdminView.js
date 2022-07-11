@@ -6,6 +6,7 @@ function AdminView(props) {
   const fillPost = props.fillPost;
   const fillPostApplicant = props.fillPostApplicant;
   const postApplicants = props.postApplicants;
+  const getPostsWithApplicants = props.getPostsWithApplicants;
 
   const [featPost, setFeatPost] = useState(null);
 
@@ -13,7 +14,7 @@ function AdminView(props) {
     setFeatPost(posts[0]);
   }, [props.posts]);
 
-  if (!featPost) {
+  if (!featPost || !postApplicants || !posts) {
     return (
       <div className="spinner-border" role="status">
         <span className="visually-hidden">Loading...</span>
@@ -21,9 +22,15 @@ function AdminView(props) {
     );
   }
 
-  function handleCLick(post, applicant) {
-    fillPost(post);
-    fillPostApplicant(post, applicant);
+  function handleCLick(featPost, applicant) {
+    fillPost(featPost);
+    fillPostApplicant(featPost, applicant);
+  }
+
+  function handleCardClick(post) {
+    setFeatPost(post);
+    getPostsWithApplicants(post.post_id ? post.post_id : 1);
+    console.log(post.post_id);
   }
 
   return (
@@ -39,8 +46,8 @@ function AdminView(props) {
         </div>
 
         <div className="col">
-          {featPost.filled === 0 ? (
-            applicants.map((applicant) => (
+          {featPost.filled === 0 && postApplicants.applicants ? (
+            postApplicants.applicants.map((applicant) => (
               <div key={applicant.applicant_id}>
                 <h5 className="card-title"> {applicant.applicantname}</h5>
                 <h6 className="card-subtitle">{applicant.email} </h6>
@@ -65,7 +72,7 @@ function AdminView(props) {
           <div
             className="card col-md-3 p-4"
             key={post.post_id}
-            onClick={() => setFeatPost(post)}
+            onClick={() => handleCardClick(post)}
           >
             <h4 className="card-title"> {post.company}</h4>
             <h6 className="card-subtitle">{post.title} </h6>

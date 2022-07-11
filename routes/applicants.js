@@ -2,6 +2,26 @@ var express = require("express");
 var router = express.Router();
 const db = require("../model/helper");
 
+function joinToJson(results) {
+  // Create array of applicants objs
+  let applicants = results.data.map((row) => ({
+    applicant_id: row.applicant_id,
+    applicantName: row.applicantName,
+    email: row.email,
+    cv: row.cv,
+  }));
+  // Create posts obj from first row
+  let row0 = results.data[0];
+  let posts = {
+    post_ID: row0.post_id,
+    company: row0.company,
+    title: row0.title,
+    postDescription: row0.postdescription,
+    applicants,
+  };
+  return posts;
+}
+
 /* GET applicants list */
 router.get("/", function (req, res, next) {
   db("SELECT * FROM applicants;")
@@ -9,6 +29,22 @@ router.get("/", function (req, res, next) {
       res.send(results.data);
     })
     .catch((err) => res.status(500).send(err));
+});
+
+/* GET posts with left join to applicants*/
+router.get("/:id", async function (req, res, next) {
+  let sql = `SELECT posts.*, posts_applicants.* , applicants.*
+  FROM posts LEFT JOIN posts_applicants ON posts.post_id = posts_applicants.ref_post_id 
+  LEFT JOIN applicants ON posts_applicants.ref_applicant_id = applicants.applicant_id  WHERE posts.post_id = ${req.params.id} 
+  `;
+
+  try {
+    let results = await db(sql);
+    // res.send(results.data);
+    res.send(joinToJson(results));
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 /* POST method */

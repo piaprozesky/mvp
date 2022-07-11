@@ -24,9 +24,9 @@ function App() {
     getApplicants();
   }, []);
 
-  useEffect(() => {
-    getPostdApplicants();
-  }, []);
+  // useEffect(() => {
+  //   getPostsWithApplicants();
+  // }, []);
 
   const getposts = async () => {
     let options = {
@@ -47,6 +47,25 @@ function App() {
     }
   };
 
+  const getPostsWithApplicants = async (id) => {
+    let options = {
+      method: "GET",
+    };
+
+    try {
+      let response = await fetch(`/applicants/${id}`, options);
+
+      if (response.ok) {
+        let data = await response.json();
+        setPostApplicants(data);
+      } else {
+        console.log(`server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`network error: ${err.message}`);
+    }
+  };
+
   const getApplicants = async () => {
     let options = {
       method: "GET",
@@ -58,25 +77,6 @@ function App() {
       if (response.ok) {
         let data = await response.json();
         setApplicants(data);
-      } else {
-        console.log(`server error: ${response.status} ${response.statusText}`);
-      }
-    } catch (err) {
-      console.log(`network error: ${err.message}`);
-    }
-  };
-
-  const getPostdApplicants = async () => {
-    let options = {
-      method: "GET",
-    };
-
-    try {
-      let response = await fetch(`/posts_applicants`, options);
-
-      if (response.ok) {
-        let data = await response.json();
-        setPostApplicants(data);
       } else {
         console.log(`server error: ${response.status} ${response.statusText}`);
       }
@@ -195,6 +195,7 @@ function App() {
               fillPost={fillPost}
               fillPostApplicant={fillPostApplicant}
               postApplicants={postApplicants}
+              getPostsWithApplicants={getPostsWithApplicants}
             />
           }
         />
