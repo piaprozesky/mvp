@@ -27,14 +27,16 @@ function AdminFilled() {
   };
 
   return (
-    <div>
-      <p>and this paragraph is in admin filled</p>
+    <div className="container">
+      <div className="pt-5"></div>
+      <h2>Filled Postions</h2>
+      <div className="pt-2"></div>
       {posts.map((post) =>
         post.filled === 1 ? (
-          <div key={post.id}>
-            <h3> {post.company}</h3>
-            <p>{post.title} </p>
-            <p>{post.postdescription}</p>
+          <div className="card col-md-3 p-4" key={post.id}>
+            <h4 className="card-title"> {post.company}</h4>
+            <h6 className="card-subtitle">{post.title} </h6>
+            <p className="card-text">{post.postdescription}</p>
           </div>
         ) : null
       )}

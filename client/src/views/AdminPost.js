@@ -15,36 +15,46 @@ function AdminPost(props) {
   }
 
   function handleSubmit(event) {
-    event.preventdefault();
+    event.preventDefault();
     props.addPost(formData);
     setFormData(emptyForm);
   }
 
   return (
-    <div>
+    <div className="container">
+      <div className="pt-5"></div>
+      <h2>Add a New Posting</h2>
       <form onSubmit={handleSubmit}>
         <label>Company</label>
         <input
+          className="form-control"
           name="company"
           type="text"
           value={formData.company}
           onChange={handleChange}
         />
+        <br />
         <label>Title</label>
         <input
+          className="form-control"
           name="title"
           type="text"
           value={formData.title}
           onChange={handleChange}
         />
+        <br />
         <label>descrition</label>
-        <input
+        <textarea
+          className="form-control"
           name="postdescription"
           type="text"
           value={formData.postdescription}
           onChange={handleChange}
-        />
-        <button>Post</button>
+        ></textarea>
+        <br />
+        <div className="text-center">
+          <button className="btn btn-primary">Post</button>
+        </div>
       </form>
     </div>
   );

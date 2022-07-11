@@ -9,27 +9,50 @@ function Navbar() {
   };
 
   return (
-    <nav className="Navbar">
-      <li>
-        <NavLink to="/user" onClick={() => handleChangeView(false)}>
-          USER
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/admin" onClick={() => handleChangeView(true)}>
-          ADMIN
-        </NavLink>
-      </li>
-      {isAdmin ? (
-        <div>
-          <li>
-            <NavLink to="/admin/post">POST</NavLink>
+    <nav className="navbar text-white bg-dark">
+      <ul>
+        <li className="nav-item">
+          <NavLink
+            className="nav-link"
+            to="/"
+            onClick={() => handleChangeView(false)}
+          >
+            USER
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink
+            className="nav-link"
+            to="/admin"
+            onClick={() => handleChangeView(true)}
+          >
+            ADMIN
+          </NavLink>
+        </li>
+
+        {isAdmin ? (
+          <div>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/admin/post">
+                POST
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/admin/filled">
+                FILLED
+              </NavLink>
+            </li>
+          </div>
+        ) : null}
+
+        {!isAdmin ? (
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/user/applied">
+              APPLIED
+            </NavLink>
           </li>
-          <li>
-            <NavLink to="/admin/filled">FILLED</NavLink>
-          </li>
-        </div>
-      ) : null}
+        ) : null}
+      </ul>
     </nav>
   );
 }
