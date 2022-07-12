@@ -30,7 +30,6 @@ function AdminView(props) {
   function handleCardClick(post) {
     setFeatPost(post);
     getPostsWithApplicants(post.post_id ? post.post_id : 1);
-    console.log(post.post_id);
   }
 
   return (
@@ -50,8 +49,8 @@ function AdminView(props) {
             postApplicants.applicants.map((applicant) => (
               <div key={applicant.applicant_id}>
                 <h5>{applicant.applicantname}</h5>
-                <h6 className="card-subtitle">{applicant.email} </h6>
-                <p className="card-text">{applicant.cv}</p>
+                <h6>{applicant.email} </h6>
+                <p>{applicant.cv}</p>
                 <button
                   onClick={() => handleCLick(featPost, applicant)}
                   className="btn"
@@ -62,11 +61,11 @@ function AdminView(props) {
               </div>
             ))
           ) : (
-            <h4>This postion has been filled</h4>
+            <h4>This position has been filled</h4>
           )}
         </div>
       </div>
-
+      <br />
       <div className="row">
         {posts.map((post) => (
           <div
