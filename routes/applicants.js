@@ -50,7 +50,6 @@ router.get("/:id", async function (req, res, next) {
 /* POST method */
 router.post("/", async function (req, res, next) {
   const { applicantname, email, cv, post_id } = req.body;
-
   const emailFound = await db(
     `SELECT email FROM applicants WHERE email = '${req.body.email}'`
   );

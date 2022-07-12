@@ -11,11 +11,13 @@ function UserHomeView(props) {
   }, [props.posts]);
 
   function handleChange(event) {
-    let { name, value } = event.target;
+    let { name, value, id } = event.target;
+    console.log(name, value, id);
 
     setFormData((data) => ({
       ...data,
       [name]: value,
+      ["post_id"]: id,
     }));
   }
 
@@ -23,21 +25,12 @@ function UserHomeView(props) {
     applicantname: "",
     email: "",
     cv: "",
-    post_id: featPost ? featPost.post_id : 0,
+    post_id: 101,
+    // featPost ? featPost.post_id : 0,
+    post_id_1: 101,
   };
 
   const [formData, setFormData] = useState(emptyForm);
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    props.addApplicant(formData);
-    setFormData(emptyForm);
-    setpostID(featPost.post_id);
-
-    if (postID) {
-      console.log(postID);
-    }
-  }
 
   if (!featPost) {
     return (
@@ -45,6 +38,19 @@ function UserHomeView(props) {
         <span className="visually-hidden">Loading...</span>
       </div>
     );
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    emptyForm.post_id = featPost.post_id;
+
+    props.addApplicant(formData);
+    console.log(formData);
+    setFormData(emptyForm);
+
+    if (postID) {
+      console.log(postID);
+    }
   }
 
   return (
@@ -65,6 +71,7 @@ function UserHomeView(props) {
             type="text"
             value={formData.applicantname}
             onChange={handleChange}
+            id={featPost.post_id}
           />
           <br />
           <label>Email</label>
@@ -74,6 +81,7 @@ function UserHomeView(props) {
             type="text"
             value={formData.email}
             onChange={handleChange}
+            id={featPost.post_id}
           />
           <br />
           <label>CV URL</label>
@@ -83,6 +91,7 @@ function UserHomeView(props) {
             type="text"
             value={formData.cv}
             onChange={handleChange}
+            id={featPost.post_id}
           />
           <br />
           <div className="text-center">

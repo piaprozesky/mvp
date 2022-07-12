@@ -49,7 +49,7 @@ function AdminView(props) {
           {featPost.filled === 0 && postApplicants.applicants ? (
             postApplicants.applicants.map((applicant) => (
               <div key={applicant.applicant_id}>
-                <h5 className="card-title"> {applicant.applicantname}</h5>
+                <h5>{applicant.applicantname}</h5>
                 <h6 className="card-subtitle">{applicant.email} </h6>
                 <p className="card-text">{applicant.cv}</p>
                 <button
@@ -62,7 +62,7 @@ function AdminView(props) {
               </div>
             ))
           ) : (
-            <h4>Accepted Applicant:</h4>
+            <h4>This postion has been filled</h4>
           )}
         </div>
       </div>
