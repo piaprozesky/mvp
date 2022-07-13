@@ -28,3 +28,20 @@
 ## Database Design
 
 https://dbdesigner.page.link/x34KbLjiFiUTLJmM9
+
+## Future Features
+
+- Login (user, professional and company)
+- Chat (connected with a random professional in chosen field)
+- Filter posts (by profession)
+- View your applications (code started in components/UserApplied)
+
+## Technologies Used
+
+- Bootstrap
+- React
+- Node.js
+- Express
+- MySQL
+- dbdesigner
+- Postman
