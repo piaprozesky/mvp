@@ -79,6 +79,7 @@ function AdminView(props) {
           </div>
         ))}
       </div>
+      <div className="pb-5"></div>
     </div>
   );
 }

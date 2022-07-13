@@ -6,7 +6,7 @@ function joinToJson(results) {
   // Create array of applicants objs
   let applicants = results.data.map((row) => ({
     applicant_id: row.applicant_id,
-    applicantName: row.applicantName,
+    applicantname: row.applicantname,
     email: row.email,
     cv: row.cv,
   }));
